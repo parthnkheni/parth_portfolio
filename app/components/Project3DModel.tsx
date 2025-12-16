@@ -456,10 +456,6 @@ export default function Project3DModel({ projectSlug }: Project3DModelProps) {
           />
         </Suspense>
       </Canvas>
-      {/* Loading overlay */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-6 h-6 border-2 border-zinc-700 border-t-zinc-400 rounded-full animate-spin opacity-0 group-hover:opacity-100 transition-opacity" />
-      </div>
     </div>
   );
 }
