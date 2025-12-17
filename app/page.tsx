@@ -6,7 +6,6 @@ import { site } from "./data/site";
 import { useEffect, useRef, useState } from "react";
 import NeuralNetworkViz from "./components/NeuralNetworkViz";
 import SimpleSkills from "./components/SimpleSkills";
-import CodeShowcase from "./components/CodeShowcase";
 import SpacePhysicsResearch from "./components/SpacePhysicsResearch";
 import ContactForm from "./components/ContactForm";
 
@@ -268,9 +267,6 @@ export default function Page() {
             </span>
           </Link>
         </section>
-
-        {/* Code Showcase */}
-        <CodeShowcase />
 
         {/* Education */}
         <section className="py-32 border-t border-zinc-900">
