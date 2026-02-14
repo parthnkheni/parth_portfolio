@@ -6,38 +6,43 @@ type Skill = {
 };
 
 const skills: Skill[] = [
-  // Languages
-  { name: "Python", category: "Languages" },
-  { name: "C/C++", category: "Languages" },
-  { name: "Java", category: "Languages" },
-  { name: "JavaScript/TypeScript", category: "Languages" },
-  { name: "MATLAB", category: "Languages" },
-  { name: "Verilog", category: "Languages" },
-  { name: "SQL", category: "Languages" },
+  // Programming
+  { name: "Python", category: "Programming" },
+  { name: "SQL", category: "Programming" },
+  { name: "MATLAB", category: "Programming" },
+  { name: "C++", category: "Programming" },
+  { name: "Java", category: "Programming" },
+  { name: "C#", category: "Programming" },
+  { name: "Objective-C", category: "Programming" },
+  { name: "OOP", category: "Programming" },
 
-  // ML/AI
-  { name: "TensorFlow", category: "ML/AI" },
-  { name: "PyTorch", category: "ML/AI" },
-  { name: "Scikit-learn", category: "ML/AI" },
-  { name: "OpenCV", category: "ML/AI" },
-  { name: "Pandas", category: "ML/AI" },
-  { name: "NumPy", category: "ML/AI" },
+  // Libraries/Frameworks
+  { name: "NumPy", category: "Libraries/Frameworks" },
+  { name: "Matplotlib", category: "Libraries/Frameworks" },
+  { name: "Pandas", category: "Libraries/Frameworks" },
+  { name: "scikit-learn", category: "Libraries/Frameworks" },
+  { name: "TensorFlow", category: "Libraries/Frameworks" },
+  { name: "Retrofit/Gson", category: "Libraries/Frameworks" },
+  { name: "Android Jetpack", category: "Libraries/Frameworks" },
 
-  // Robotics
-  { name: "ROS", category: "Robotics" },
-  { name: "Gazebo", category: "Robotics" },
-  { name: "AMBF", category: "Robotics" },
-  { name: "Arduino", category: "Robotics" },
+  // Cloud/Tools
+  { name: "Azure AD", category: "Cloud/Tools" },
+  { name: "GitHub", category: "Cloud/Tools" },
+  { name: "Microsoft 365", category: "Cloud/Tools" },
+  { name: "Arduino", category: "Cloud/Tools" },
+  { name: "Android Studio", category: "Cloud/Tools" },
+  { name: "API", category: "Cloud/Tools" },
+  { name: "Power BI", category: "Cloud/Tools" },
+  { name: "WorkManager", category: "Cloud/Tools" },
 
-  // Web/Cloud
-  { name: "React", category: "Web/Cloud" },
-  { name: "Node.js", category: "Web/Cloud" },
-  { name: "AWS", category: "Web/Cloud" },
-  { name: "Docker", category: "Web/Cloud" },
-  { name: "Git", category: "Web/Cloud" },
+  // Machine Learning
+  { name: "Predictive Modeling", category: "Machine Learning" },
+  { name: "Statistical Modeling", category: "Machine Learning" },
+  { name: "Time-Series Analysis", category: "Machine Learning" },
+  { name: "Anomaly Detection", category: "Machine Learning" },
 ];
 
-const categories = ["Languages", "ML/AI", "Robotics", "Web/Cloud"];
+const categories = ["Programming", "Libraries/Frameworks", "Cloud/Tools", "Machine Learning"];
 
 export default function SimpleSkills() {
   return (

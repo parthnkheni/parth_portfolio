@@ -18,6 +18,12 @@ export default function ExperiencePage() {
               <Link href="/projects" className="hover:text-zinc-50 transition-colors">
                 Projects
               </Link>
+              <Link href="/certifications" className="hover:text-zinc-50 transition-colors">
+                Certifications
+              </Link>
+              <Link href="/research" className="hover:text-zinc-50 transition-colors">
+                Research
+              </Link>
               <Link href="/game" className="hover:text-zinc-50 transition-colors">
                 Demo
               </Link>

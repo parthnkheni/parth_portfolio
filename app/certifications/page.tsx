@@ -24,6 +24,9 @@ export default function CertificationsPage() {
               <Link href="/experience" className="hover:text-zinc-50 transition-colors">
                 Experience
               </Link>
+              <Link href="/research" className="hover:text-zinc-50 transition-colors">
+                Research
+              </Link>
               <Link href="/game" className="hover:text-zinc-50 transition-colors">
                 Demo
               </Link>

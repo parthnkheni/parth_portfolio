@@ -39,6 +39,20 @@ export type Activity = {
   date: string;
 };
 
+export type Publication = {
+  authors: string;
+  title: string;
+  venue: string;
+  date: string;
+  note?: string;
+};
+
+export type Award = {
+  title: string;
+  detail: string;
+  date: string;
+};
+
 export const site: {
   name: string;
   tagline: string;
@@ -54,10 +68,13 @@ export const site: {
     programming: string[];
     cloudTools: string[];
     machineLearning: string[];
+    librariesFrameworks: string[];
   };
   experiences: Experience[];
   education: Education[];
   activities: Activity[];
+  publications: Publication[];
+  awards: Award[];
   projects: Project[];
 } = {
   name: "Parth Kheni",
@@ -72,9 +89,10 @@ export const site: {
   },
 
   skills: {
-    programming: ["Python", "C++", "Java", "Kotlin", "MATLAB", "SQL", "C#", "Objective-C"],
-    cloudTools: ["Azure AD", "GitHub", "Microsoft 365", "Arduino", "Android Studio", "Postman", "WorkManager"],
-    machineLearning: ["PyTorch", "TensorFlow", "LSTM", "CNN", "RNN", "scikit-learn", "Time-series", "Regression"],
+    programming: ["Python", "SQL", "MATLAB", "C++", "Java", "C#", "Objective-C", "OOP"],
+    cloudTools: ["Azure AD", "GitHub", "Microsoft 365", "Arduino", "Android Studio", "API", "Power BI", "WorkManager"],
+    machineLearning: ["Predictive Modeling", "Statistical Modeling", "Time-Series Analysis", "Anomaly Detection"],
+    librariesFrameworks: ["NumPy", "Matplotlib", "Pandas", "scikit-learn", "TensorFlow", "Retrofit/Gson", "Android Jetpack"],
   },
 
   experiences: [
@@ -84,12 +102,11 @@ export const site: {
       date: "Sept 2025 – Present",
       location: "Boston, MA",
       description: [
-        "Built GPU-enabled surgical robotics simulation workflow for da Vinci Research Kit (dVRK), a research platform used in autonomous surgery development",
-        "Designed and implemented neural network architectures to predict 6-DoF end-effector states based on surgical instrument telemetry",
-        "Prototyped incision-closure tasks in NVIDIA Isaac Sim/ORBIT Surgical by setting up a reproducible Omniverse/Isaac environment for labeling and dataset construction",
-        "Improved ML autonomy training reliability by diagnosing a preprocessing mismatch that reduced performance from -90% to 48% accuracy, enabling better learning and control",
+        "Build a GPU-enabled surgical robotics simulation workflow for the da Vinci Research Kit (dVRK) using ROS and Gazebo/AMBF on BU's Shared Computing Cluster (SCC) by containerizing dependencies with Singularity/Apptainer and creating reliable scripts to launch and view simulations remotely",
+        "Prototype incision-closure tasks in NVIDIA Isaac Sim/ORBIT-Surgical by setting up a reproducible Omniverse/Isaac environment (fixed versions and dependencies) and organizing the required simulation assets for surgical manipulation",
+        "Improve ML autonomy training reliability by diagnosing a preprocessing mismatch that reduced performance from ~90% to ~30%, curating/labeling demonstration data (e.g. ~80 JIGSAWS trajectories), and collaborating with Johns Hopkins to acquire new dVRK kinematic demos to standardize multimodal inputs (vision + kinematics)",
       ],
-      tech: ["Python", "PyTorch", "NVIDIA Isaac Sim", "ROS", "Computer Vision", "dVRK"],
+      tech: ["Python", "ROS", "Gazebo/AMBF", "NVIDIA Isaac Sim", "Singularity/Apptainer", "dVRK"],
     },
     {
       company: "Boston University Center for Space Physics",
@@ -97,22 +114,11 @@ export const site: {
       date: "Apr 2025 – Present",
       location: "Boston, MA",
       description: [
-        "Developed end-to-end data pipelines in Python and SQL for time-series ingestion and preprocessing of POES satellite telemetry and the OMNI database",
-        "Designed and trained supervised machine learning models (Random Forests, LSTM Neural Networks) for predictive analytics of space-weather events, improving detection accuracy by 15%",
-        "Performed advanced feature engineering, hyperparameter tuning (grid search, cross-validation), and statistical modeling to optimize model precision and recall",
+        "Build end-to-end Python pipelines for POES and OMNI time-series data, generating model-ready datasets with 7M+ 2-second satellite samples per month by ingesting NetCDF files, interpolating gaps, enforcing L-shell (3–9) and MLT quality cuts, and joining with 4-hour windows of 1-minute solar-wind drivers",
+        "Improve E4_0/E4_90 energetic electron precipitation forecasts, lowering test MAE/RMSE and boosting correlation vs prior baselines, by training Keras neural nets and Ridge regressors with standardized features and time-ordered train/val/test splits",
+        "Increase interpretability of space-weather predictions across different storm conditions and locations in the radiation belts, improving generalization during rare, high-flux events, by testing different time resolutions (2-second vs 1-minute data), quantile-based flux aggregations, and simple features that capture local time around Earth",
       ],
-      tech: ["Python", "SQL", "Pandas", "LSTM", "Random Forest", "scikit-learn", "Time-series Analysis"],
-    },
-    {
-      company: "Electronic Arts",
-      role: "Software Engineering Virtual Experience Program",
-      date: "June 2025",
-      description: [
-        "Proposed a new feature for EA Sports College Football and wrote a Feature Proposal describing it to other stakeholders",
-        "Built a class diagram and created a header file in C++ with class definitions for each object",
-        "Patched a bugfix and optimized the EA Sports College Football codebase by implementing an improved data structure",
-      ],
-      tech: ["C++", "Software Design", "Data Structures"],
+      tech: ["Python", "Keras", "Ridge Regression", "Pandas", "NetCDF", "Time-series Analysis"],
     },
     {
       company: "Blue Leaf Technologies",
@@ -144,15 +150,14 @@ export const site: {
       concentration: "Machine Learning",
       date: "Expected Dec 2026",
       coursework: [
+        "Machine Learning",
+        "Probability Statistics & Data Science",
+        "Computation Linear Algebra",
+        "Applied Algorithms",
+        "Cloud Computing",
+        "Software Engineering",
+        "Computer Architecture",
         "Differential Equations",
-        "Multi-Variable Calculus",
-        "Microeconomics",
-        "Macroeconomics",
-        "Statistics",
-        "Linear Algebra",
-        "Electric Circuits",
-        "Discrete Math",
-        "Data Structures",
       ],
       honors: [],
     },
@@ -178,11 +183,51 @@ export const site: {
     },
   ],
 
+  publications: [
+    {
+      authors: "Capannolo, L., Pettit, J., Elliott, S., Morales, J. P. B., Bibeau, A., Kheni, P. N.",
+      title: "Monitoring radiation belt electrons at LEO: preliminary results of MAPLE (MAPs of LEO Electrons) model.",
+      venue: "COSPAR 2026",
+      date: "Feb 2026",
+      note: "Abstract (submitted)",
+    },
+  ],
+
+  awards: [
+    {
+      title: "NSF ACCESS / Jetstream2 Allocation (CIS260066)",
+      detail: "$31,444 awarded; 146,000 GPU SUs; 4 TB storage.",
+      date: "Jan 2026 – Present",
+    },
+    {
+      title: "GEM Workshop – Invited Speaker (Portland, ME)",
+      detail: "Selected to present machine learning research.",
+      date: "July 2026",
+    },
+  ],
+
   projects: [
+    {
+      slug: "llm-incident-pipeline",
+      title: "LLM-Assisted Incident Summarization & Clustering",
+      date: "Jan 2026 – Present",
+      blurb:
+        "End-to-end incident intelligence pipeline using LLMs to ingest logs, generate structured summaries, embed and cluster incidents to identify duplicates and recurring failure patterns. Microsoft-affiliated.",
+      overview:
+        "Built an end-to-end incident intelligence pipeline that ingests large-scale system/application logs, generates structured incident summaries with LLMs, embeds summaries, and clusters incidents to identify duplicates and recurring failure patterns. Includes a backend service and lightweight UI/API to explore incidents and clusters.",
+      tech: ["Python", "LLMs", "Embeddings", "Clustering", "NLP", "REST API"],
+      highlights: [
+        "Built an end-to-end incident intelligence pipeline: ingest large-scale system/application logs, generate structured incident summaries with LLMs, embed summaries, and cluster incidents to identify duplicates and recurring failure patterns",
+        "Implemented a backend service and lightweight UI/API to explore incidents and clusters, making practical accuracy vs cost/latency tradeoffs to support scalable operation on noisy real-world logs",
+      ],
+      results: [
+        "Scalable pipeline handling noisy real-world logs with practical accuracy vs cost/latency tradeoffs",
+      ],
+    },
     {
       slug: "whack-a-mole-fpga",
       title: "Whack-a-Mole Reaction Game on FPGA",
-      date: "Sept 2025 – Present",
+      date: "Sept 2025 – Dec 2025",
       blurb:
         "Real-time Whack-a-Mole reaction game on Nexys4 DDR FPGA with multi-difficulty rounds and LED/switch I/O.",
       overview:

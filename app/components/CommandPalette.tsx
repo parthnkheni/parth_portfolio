@@ -131,6 +131,7 @@ export default function CommandPalette() {
       action: () => {
         const skillsOutput = `
 Programming: ${site.skills.programming.join(", ")}
+Libraries/Frameworks: ${site.skills.librariesFrameworks.join(", ")}
 ML/AI: ${site.skills.machineLearning.join(", ")}
 Tools: ${site.skills.cloudTools.join(", ")}
 `;

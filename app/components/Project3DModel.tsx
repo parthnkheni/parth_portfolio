@@ -407,6 +407,103 @@ function ECGHeartbeat() {
   );
 }
 
+// LLM Incident Pipeline Model
+function LLMPipeline() {
+  return (
+    <group>
+      {/* Input documents (left side) - 3 log files feeding in */}
+      {[-0.4, 0, 0.4].map((z, i) => (
+        <mesh key={`doc-${i}`} position={[-1.2, 0.1 * i - 0.1, z]}>
+          <boxGeometry args={[0.4, 0.5, 0.02]} />
+          <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+        </mesh>
+      ))}
+
+      {/* Document lines (text representation) */}
+      {[-0.4, 0, 0.4].map((z, i) =>
+        [0.1, 0, -0.1].map((ly, j) => (
+          <mesh key={`line-${i}-${j}`} position={[-1.2, 0.1 * i - 0.1 + ly, z + 0.02]}>
+            <boxGeometry args={[0.25, 0.02, 0.01]} />
+            <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+          </mesh>
+        ))
+      )}
+
+      {/* Arrow / connection from docs to LLM (left pipe) */}
+      <mesh position={[-0.7, 0, 0]}>
+        <boxGeometry args={[0.5, 0.04, 0.04]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Central LLM processor box */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.8, 0.8, 0.8]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Inner chip / brain detail */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.5, 0.5, 0.5]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Neural network nodes inside processor */}
+      {[
+        [-0.12, 0.12, 0.41], [0.12, 0.12, 0.41],
+        [-0.12, -0.12, 0.41], [0.12, -0.12, 0.41],
+        [0, 0, 0.41],
+      ].map((pos, i) => (
+        <mesh key={`node-${i}`} position={pos as [number, number, number]}>
+          <sphereGeometry args={[0.04, 8, 8]} />
+          <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+        </mesh>
+      ))}
+
+      {/* Arrow / connection from LLM to clusters (right pipe) */}
+      <mesh position={[0.7, 0, 0]}>
+        <boxGeometry args={[0.5, 0.04, 0.04]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Output clusters - Cluster 1 (top right) */}
+      {[
+        [1.3, 0.35, 0.15], [1.5, 0.4, -0.1], [1.35, 0.25, -0.15], [1.45, 0.45, 0.05],
+      ].map((pos, i) => (
+        <mesh key={`c1-${i}`} position={pos as [number, number, number]}>
+          <sphereGeometry args={[0.08, 12, 12]} />
+          <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+        </mesh>
+      ))}
+
+      {/* Output clusters - Cluster 2 (bottom right) */}
+      {[
+        [1.25, -0.3, 0.1], [1.45, -0.35, -0.05], [1.35, -0.2, -0.2], [1.5, -0.25, 0.15],
+      ].map((pos, i) => (
+        <mesh key={`c2-${i}`} position={pos as [number, number, number]}>
+          <sphereGeometry args={[0.08, 12, 12]} />
+          <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+        </mesh>
+      ))}
+
+      {/* Output clusters - Cluster 3 (middle right) */}
+      {[
+        [1.55, 0.05, 0.2], [1.7, 0, -0.05], [1.6, -0.05, 0.1],
+      ].map((pos, i) => (
+        <mesh key={`c3-${i}`} position={pos as [number, number, number]}>
+          <sphereGeometry args={[0.08, 12, 12]} />
+          <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+        </mesh>
+      ))}
+
+      {/* Base platform */}
+      <mesh position={[0.2, -0.55, 0]}>
+        <boxGeometry args={[3.5, 0.04, 1.2]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+    </group>
+  );
+}
+
 type Project3DModelProps = {
   projectSlug: string;
 };
@@ -426,6 +523,8 @@ export default function Project3DModel({ projectSlug }: Project3DModelProps) {
         return <StockChart />;
       case "ecg-data-analysis":
         return <ECGHeartbeat />;
+      case "llm-incident-pipeline":
+        return <LLMPipeline />;
       default:
         return null;
     }

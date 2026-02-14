@@ -1,0 +1,34 @@
+from pathlib import Path
+import csv
+import re
+
+# ---- paths ----
+csv_path = Path.home() / "Downloads" / "parth - data annotation tracker - tissue 5 needle throw.csv"
+out_dir = Path.home() / "Downloads" / "tissue_5" / "2_needle_throw"
+
+out_dir.mkdir(parents=True, exist_ok=True)
+
+with csv_path.open(newline="", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+
+    # Column A = first column in the CSV
+    id_col = reader.fieldnames[0]
+
+    # Label columns like G2, G3, G16, G7 (keeps CSV order)
+    label_cols = [c for c in reader.fieldnames if re.fullmatch(r"G\d+", c)]
+
+    for row in reader:
+        file_id = row[id_col].strip()
+        if not file_id:
+            continue
+
+        lines = []
+        for c in label_cols:
+            val = row[c].strip()
+            if val:
+                lines.append(val)
+
+        out_path = out_dir / f"{file_id}_labels.txt"
+        out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+print(f"Done. Text files written to:\n{out_dir}")

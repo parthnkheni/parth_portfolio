@@ -21,6 +21,9 @@ export default function GamePage() {
               <Link href="/experience" className="hover:text-zinc-50 transition-colors">
                 Experience
               </Link>
+              <Link href="/research" className="hover:text-zinc-50 transition-colors">
+                Research
+              </Link>
             </div>
           </div>
         </div>
