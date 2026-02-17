@@ -185,9 +185,9 @@ export default function Page() {
                   </h3>
                   <p className="text-zinc-400 mb-4">Machine Learning Intern</p>
                   <p className="text-zinc-500 leading-relaxed">
-                    Building GPU-enabled surgical robotics simulation workflows for the da Vinci Research Kit
-                    using ROS and Gazebo/AMBF. Improving ML autonomy training reliability by diagnosing preprocessing
-                    mismatches and curating demonstration data from JIGSAWS trajectories.
+                    Leading a multi-institutional collaboration between BIDMC and Johns Hopkins to develop and integrate
+                    a learning-based autonomous wound closure algorithm within the da Vinci research platform for future
+                    clinical translation.
                   </p>
                 </div>
 
