@@ -178,6 +178,7 @@ export default function NeuralNetworkViz() {
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-auto"
       style={{ opacity: 0.6 }}
+      aria-label="Interactive neural network visualization with animated neurons and connections"
     />
   );
 }

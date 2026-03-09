@@ -68,6 +68,7 @@ function AnimatedOrbs() {
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none"
       style={{ filter: 'blur(60px)' }}
+      aria-hidden="true"
     />
   );
 }
@@ -142,7 +143,7 @@ export default function Page() {
             <Link href="/" className="text-zinc-50 font-light">
               PK
             </Link>
-            <div className="flex gap-8 text-zinc-400 font-light">
+            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
               <a href="#work" className="hover:text-zinc-50 transition-colors">
                 Work
               </a>
@@ -188,6 +189,9 @@ export default function Page() {
                     Leading a multi-institutional collaboration between BIDMC and Johns Hopkins to develop and integrate
                     a learning-based autonomous wound closure algorithm within the da Vinci research platform for future
                     clinical translation.
+                  </p>
+                  <p className="text-zinc-500 mt-3 text-sm">
+                    <span className="text-zinc-400">NSF ACCESS / Jetstream2</span> — $31,444 allocation · 146,000 GPU SUs
                   </p>
                 </div>
 

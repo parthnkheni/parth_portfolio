@@ -11,7 +11,7 @@ export default function ExperiencePage() {
             <Link href="/" className="text-zinc-50 font-light">
               PK
             </Link>
-            <div className="flex gap-8 text-zinc-400 font-light">
+            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
               <Link href="/" className="hover:text-zinc-50 transition-colors">
                 Home
               </Link>
@@ -43,9 +43,9 @@ export default function ExperiencePage() {
         </header>
 
         <div className="space-y-16">
-          {site.experiences.map((exp, i) => (
+          {site.experiences.map((exp) => (
             <article
-              key={i}
+              key={exp.company}
               className="grid md:grid-cols-3 gap-8 pb-16 border-b border-zinc-900"
             >
               <div>

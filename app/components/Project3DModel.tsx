@@ -1,8 +1,9 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, useRef, useCallback } from "react";
+import * as THREE from "three";
 
 // Temperature Sensor Box Model
 function TemperatureSensorBox() {
@@ -295,114 +296,176 @@ function PortfolioWebsite() {
   );
 }
 
-// Stock Chart Model
+// Stock Chart Model - Phone with candlestick chart
 function StockChart() {
   return (
     <group>
-      {/* Chart background */}
+      {/* Phone body - wireframe */}
       <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[2.5, 1.5, 0.1]} />
-        <meshStandardMaterial color="#0f172a" metalness={0.2} roughness={0.8} />
+        <boxGeometry args={[1.6, 2.8, 0.1]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
       </mesh>
 
-      {/* Grid lines */}
-      {[...Array(5)].map((_, i) => (
-        <mesh key={`h-${i}`} position={[0, -0.6 + i * 0.3, 0.06]}>
-          <boxGeometry args={[2.3, 0.01, 0.01]} />
-          <meshStandardMaterial color="#1e293b" />
+      {/* Screen area */}
+      <mesh position={[0, 0.1, 0.06]}>
+        <boxGeometry args={[1.35, 2.2, 0.01]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Notch at top */}
+      <mesh position={[0, 1.25, 0.06]}>
+        <boxGeometry args={[0.4, 0.08, 0.02]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Chart Y axis */}
+      <mesh position={[-0.55, 0.1, 0.08]}>
+        <boxGeometry args={[0.015, 1.6, 0.01]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Chart X axis */}
+      <mesh position={[0, -0.7, 0.08]}>
+        <boxGeometry args={[1.1, 0.015, 0.01]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Grid lines - horizontal */}
+      {Array.from({ length: 4 }, (_, i) => (
+        <mesh key={`grid-h-${i}`} position={[0, -0.35 + i * 0.3, 0.075]}>
+          <boxGeometry args={[1.05, 0.005, 0.005]} />
+          <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
         </mesh>
       ))}
 
-      {/* Stock line chart (upward trend) */}
+      {/* Candlestick bars - body (thick) and wicks (thin) */}
       {[
-        [-1, -0.4], [-0.7, -0.2], [-0.4, 0], [-0.1, -0.1],
-        [0.2, 0.2], [0.5, 0.3], [0.8, 0.5], [1.1, 0.6]
-      ].map((pos, i) => (
-        <mesh key={i} position={[pos[0], pos[1], 0.06]}>
-          <sphereGeometry args={[0.05, 16, 16]} />
-          <meshStandardMaterial color="#10b981" emissive="#10b981" emissiveIntensity={0.3} />
-        </mesh>
-      ))}
-
-      {/* Connecting lines */}
-      {[
-        [-1, -0.4, -0.7, -0.2], [-0.7, -0.2, -0.4, 0], [-0.4, 0, -0.1, -0.1],
-        [-0.1, -0.1, 0.2, 0.2], [0.2, 0.2, 0.5, 0.3], [0.5, 0.3, 0.8, 0.5],
-        [0.8, 0.5, 1.1, 0.6]
-      ].map((line, i) => {
-        const x = (line[0] + line[2]) / 2;
-        const y = (line[1] + line[3]) / 2;
-        const length = Math.sqrt(Math.pow(line[2] - line[0], 2) + Math.pow(line[3] - line[1], 2));
-        const angle = Math.atan2(line[3] - line[1], line[2] - line[0]);
+        { x: -0.4, low: -0.5, open: -0.3, close: -0.1, high: 0.0 },
+        { x: -0.22, low: -0.2, open: -0.1, close: 0.15, high: 0.25 },
+        { x: -0.04, low: -0.05, open: 0.2, close: 0.05, high: 0.3 },
+        { x: 0.14, low: 0.0, open: 0.1, close: 0.35, high: 0.45 },
+        { x: 0.32, low: 0.15, open: 0.35, close: 0.2, high: 0.5 },
+        { x: 0.5, low: 0.25, open: 0.3, close: 0.55, high: 0.65 },
+      ].map((candle, i) => {
+        const bodyBottom = Math.min(candle.open, candle.close);
+        const bodyTop = Math.max(candle.open, candle.close);
+        const bodyHeight = bodyTop - bodyBottom;
+        const bodyCenter = (bodyTop + bodyBottom) / 2;
+        const wickHeight = candle.high - candle.low;
+        const wickCenter = (candle.high + candle.low) / 2;
 
         return (
-          <mesh key={i} position={[x, y, 0.06]} rotation={[0, 0, angle]}>
-            <boxGeometry args={[length, 0.03, 0.01]} />
-            <meshStandardMaterial color="#10b981" emissive="#10b981" emissiveIntensity={0.2} />
+          <group key={`candle-${i}`}>
+            {/* Wick (thin line) */}
+            <mesh position={[candle.x, wickCenter, 0.08]}>
+              <boxGeometry args={[0.015, wickHeight, 0.01]} />
+              <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+            </mesh>
+            {/* Body (thick bar) */}
+            <mesh position={[candle.x, bodyCenter, 0.08]}>
+              <boxGeometry args={[0.1, Math.max(bodyHeight, 0.04), 0.03]} />
+              <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+            </mesh>
+          </group>
+        );
+      })}
+
+      {/* Trend line connecting closes */}
+      {[
+        [-0.4, -0.1, -0.22, 0.15],
+        [-0.22, 0.15, -0.04, 0.05],
+        [-0.04, 0.05, 0.14, 0.35],
+        [0.14, 0.35, 0.32, 0.2],
+        [0.32, 0.2, 0.5, 0.55],
+      ].map((line, i) => {
+        const cx = (line[0] + line[2]) / 2;
+        const cy = (line[1] + line[3]) / 2;
+        const dx = line[2] - line[0];
+        const dy = line[3] - line[1];
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+        return (
+          <mesh key={`trend-${i}`} position={[cx, cy, 0.09]} rotation={[0, 0, angle]}>
+            <boxGeometry args={[length, 0.02, 0.01]} />
+            <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
           </mesh>
         );
       })}
 
-      {/* Phone frame */}
-      <mesh position={[0, 0, -0.06]}>
-        <boxGeometry args={[2.7, 1.7, 0.15]} />
-        <meshStandardMaterial color="#18181b" metalness={0.6} roughness={0.4} />
+      {/* Dollar sign indicator (top of screen) */}
+      <mesh position={[-0.45, 0.95, 0.08]}>
+        <boxGeometry args={[0.3, 0.12, 0.01]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
+      </mesh>
+
+      {/* Portfolio value box (top right) */}
+      <mesh position={[0.3, 0.95, 0.08]}>
+        <boxGeometry args={[0.5, 0.12, 0.01]} />
+        <meshBasicMaterial color="#ffffff" wireframe wireframeLinewidth={2} />
       </mesh>
     </group>
   );
 }
 
-// ECG Heartbeat Model
+// Animated ECG waveform line
+function AnimatedECGLine() {
+  const groupRef = useRef<THREE.Group>(null);
+
+  const ecgWave = useCallback((t: number): number => {
+    const tn = ((t % 1) + 1) % 1;
+    // P wave
+    if (tn > 0.08 && tn < 0.18) {
+      return 0.12 * Math.sin(((tn - 0.08) / 0.1) * Math.PI);
+    }
+    // Q dip
+    if (tn > 0.28 && tn < 0.31) {
+      return -0.08 * Math.sin(((tn - 0.28) / 0.03) * Math.PI);
+    }
+    // R peak (tall spike)
+    if (tn > 0.31 && tn < 0.37) {
+      return 0.55 * Math.sin(((tn - 0.31) / 0.06) * Math.PI);
+    }
+    // S dip
+    if (tn > 0.37 && tn < 0.41) {
+      return -0.15 * Math.sin(((tn - 0.37) / 0.04) * Math.PI);
+    }
+    // T wave
+    if (tn > 0.52 && tn < 0.66) {
+      return 0.18 * Math.sin(((tn - 0.52) / 0.14) * Math.PI);
+    }
+    return 0;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return;
+    const time = clock.getElapsedTime() * 0.4;
+    const children = groupRef.current.children;
+    const count = children.length;
+    for (let i = 0; i < count; i++) {
+      const mesh = children[i] as THREE.Mesh;
+      const xNorm = i / (count - 1);
+      mesh.position.y = ecgWave(xNorm - time);
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      {Array.from({ length: 100 }, (_, i) => (
+        <mesh key={i} position={[-1.1 + i * (2.2 / 99), 0, 0.05]}>
+          <sphereGeometry args={[0.018, 6, 6]} />
+          <meshBasicMaterial color="#ef4444" />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+// ECG Heartbeat Model - just the waveform, no monitor
 function ECGHeartbeat() {
   return (
     <group>
-      {/* Monitor screen */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[2.5, 1.5, 0.1]} />
-        <meshStandardMaterial color="#0a0a0a" metalness={0.3} roughness={0.7} />
-      </mesh>
-
-      {/* Grid background */}
-      {[...Array(8)].map((_, i) => (
-        <mesh key={`v-${i}`} position={[-1.1 + i * 0.3, 0, 0.06]}>
-          <boxGeometry args={[0.01, 1.4, 0.01]} />
-          <meshStandardMaterial color="#1a3a1a" />
-        </mesh>
-      ))}
-      {[...Array(6)].map((_, i) => (
-        <mesh key={`h-${i}`} position={[0, -0.6 + i * 0.25, 0.06]}>
-          <boxGeometry args={[2.3, 0.01, 0.01]} />
-          <meshStandardMaterial color="#1a3a1a" />
-        </mesh>
-      ))}
-
-      {/* ECG waveform */}
-      {[
-        [-1.2, 0], [-1.1, 0], [-1.0, 0.1], [-0.95, -0.1], [-0.9, 0.6],
-        [-0.85, -0.2], [-0.8, 0.15], [-0.75, 0], [-0.5, 0],
-        [-0.4, 0], [-0.35, 0.1], [-0.3, -0.1], [-0.25, 0.6],
-        [-0.2, -0.2], [-0.15, 0.15], [-0.1, 0], [0.2, 0],
-        [0.3, 0], [0.35, 0.1], [0.4, -0.1], [0.45, 0.6],
-        [0.5, -0.2], [0.55, 0.15], [0.6, 0], [0.9, 0],
-        [1.0, 0], [1.05, 0.1], [1.1, -0.1], [1.15, 0.6]
-      ].map((pos, i) => (
-        <mesh key={i} position={[pos[0], pos[1], 0.07]}>
-          <sphereGeometry args={[0.02, 8, 8]} />
-          <meshStandardMaterial color="#10b981" emissive="#10b981" emissiveIntensity={0.5} />
-        </mesh>
-      ))}
-
-      {/* Heart rate indicator */}
-      <mesh position={[-1, 0.6, 0.07]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#ef4444" emissive="#ef4444" emissiveIntensity={0.6} />
-      </mesh>
-
-      {/* Monitor frame */}
-      <mesh position={[0, 0, -0.06]}>
-        <boxGeometry args={[2.7, 1.7, 0.15]} />
-        <meshStandardMaterial color="#18181b" metalness={0.6} roughness={0.4} />
-      </mesh>
+      {/* Animated ECG waveform */}
+      <AnimatedECGLine />
     </group>
   );
 }
@@ -511,8 +574,6 @@ type Project3DModelProps = {
 export default function Project3DModel({ projectSlug }: Project3DModelProps) {
   const getModel = () => {
     switch (projectSlug) {
-      case "portfolio-website":
-        return <PortfolioWebsite />;
       case "room-temperature-monitor":
         return <TemperatureSensorBox />;
       case "maps-robot":

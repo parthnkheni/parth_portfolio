@@ -11,7 +11,7 @@ export default function GamePage() {
             <Link href="/" className="text-zinc-50 font-light">
               PK
             </Link>
-            <div className="flex gap-8 text-zinc-400 font-light">
+            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
               <Link href="/" className="hover:text-zinc-50 transition-colors">
                 Home
               </Link>
@@ -20,6 +20,9 @@ export default function GamePage() {
               </Link>
               <Link href="/experience" className="hover:text-zinc-50 transition-colors">
                 Experience
+              </Link>
+              <Link href="/certifications" className="hover:text-zinc-50 transition-colors">
+                Certifications
               </Link>
               <Link href="/research" className="hover:text-zinc-50 transition-colors">
                 Research

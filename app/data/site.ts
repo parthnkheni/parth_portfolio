@@ -92,7 +92,7 @@ export const site: {
     programming: ["Python", "SQL", "MATLAB", "C++", "Java", "C#", "Objective-C", "OOP"],
     cloudTools: ["Azure AD", "GitHub", "Microsoft 365", "Arduino", "Android Studio", "API", "Power BI", "WorkManager"],
     machineLearning: ["Predictive Modeling", "Statistical Modeling", "Time-Series Analysis", "Anomaly Detection"],
-    librariesFrameworks: ["NumPy", "Matplotlib", "Pandas", "scikit-learn", "TensorFlow", "Retrofit/Gson", "Android Jetpack"],
+    librariesFrameworks: ["NumPy", "Matplotlib", "Pandas", "scikit-learn", "TensorFlow", "PyTorch", "Retrofit/Gson", "Android Jetpack"],
   },
 
   experiences: [
@@ -102,11 +102,11 @@ export const site: {
       date: "Sept 2025 – Present",
       location: "Boston, MA",
       description: [
-        "Build a GPU-enabled surgical robotics simulation workflow for the da Vinci Research Kit (dVRK) using ROS and Gazebo/AMBF on BU's Shared Computing Cluster (SCC) by containerizing dependencies with Singularity/Apptainer and creating reliable scripts to launch and view simulations remotely",
-        "Prototype incision-closure tasks in NVIDIA Isaac Sim/ORBIT-Surgical by setting up a reproducible Omniverse/Isaac environment (fixed versions and dependencies) and organizing the required simulation assets for surgical manipulation",
-        "Improve ML autonomy training reliability by diagnosing a preprocessing mismatch that reduced performance from ~90% to ~30%, curating/labeling demonstration data (e.g. ~80 JIGSAWS trajectories), and collaborating with Johns Hopkins to acquire new dVRK kinematic demos to standardize multimodal inputs (vision + kinematics)",
+        "Lead a multi-institutional collaboration between BIDMC and Johns Hopkins to develop and integrate a learning-based autonomous wound closure algorithm within the da Vinci Research Kit (dVRK) platform for future clinical translation, coordinating requirements and experiment milestones across teams",
+        "Build repeatable wound-closure experiments by standardizing task setup, ROS data capture, labeling guidelines, and evaluation metrics; maintain consistent dataset formats across runs to enable clean comparisons and faster iteration on autonomy behavior",
+        "Maintain a reproducible NVIDIA Isaac Sim + ORBIT-Surgical pipeline on BU's HPC Cluster using Singularity containers, and document protocols, results, and meeting action items to keep development aligned",
       ],
-      tech: ["Python", "ROS", "Gazebo/AMBF", "NVIDIA Isaac Sim", "Singularity/Apptainer", "dVRK"],
+      tech: ["Python", "ROS", "NVIDIA Isaac Sim", "ORBIT-Surgical", "Singularity", "dVRK"],
     },
     {
       company: "Boston University Center for Space Physics",
@@ -136,8 +136,7 @@ export const site: {
       role: "Instructor",
       date: "Apr 2022 – Jul 2023",
       description: [
-        "Delivered engaging math instruction to classes of up to 10 students using diverse methods, raising comprehension by 20% and improving overall engagement by 25%",
-        "Evaluated 100+ assignments monthly, providing constructive feedback, clear guidelines, and tailored reinforcement to build confidence, discipline, and student growth",
+        "Delivered math instruction to classes of up to 10 students, raising comprehension by 20% and improving engagement by 25%",
       ],
       tech: [],
     },
@@ -225,52 +224,23 @@ export const site: {
       ],
     },
     {
-      slug: "whack-a-mole-fpga",
-      title: "Whack-a-Mole Reaction Game on FPGA",
-      date: "Sept 2025 – Dec 2025",
+      slug: "ecg-data-analysis",
+      title: "ECG Data Analysis",
+      date: "Sept 2024 – Dec 2024",
       blurb:
-        "Real-time Whack-a-Mole reaction game on Nexys4 DDR FPGA with multi-difficulty rounds and LED/switch I/O.",
+        "ML classifiers for ECG arrhythmia detection achieving over 90% accuracy.",
       overview:
-        "Designed a real-time Whack-a-Mole reaction game on a Nexys4 DDR FPGA, enabling 30-second multi-difficulty rounds with 5 LED 'moles' and per-mole switch/hammer input. Features debounced button I/O, difficulty timing, random mole selection, and comprehensive top-level integration in Verilog.",
-      tech: ["Verilog", "FPGA", "Nexys4 DDR", "Vivado", "Digital Logic Design"],
+        "Processed and cleaned raw ECG signals in Python/Pandas, applying digital filters and performing feature engineering (time-domain and frequency-domain metrics) for anomaly detection.",
+      tech: ["Python", "Pandas", "scikit-learn", "SVM", "Random Forest", "Matplotlib", "Seaborn"],
       highlights: [
-        "Designed real-time Whack-a-Mole reaction game on Nexys4 DDR FPGA with 30-second multi-difficulty rounds",
-        "Implemented 5 LED 'moles' with per-mole switch/hammer input using debounced button I/O",
-        "Engineered difficulty timing, random mole selection, and top-level integration in Verilog",
-        "Improved reliability and integration by owning input and game-control modules across 4-person team",
-        "Delivered glitch-free demo through Vivado simulation, timing analysis, and on-board testing",
+        "Processed and cleaned raw ECG signals in Python/Pandas, applying digital filters and feature engineering (time-domain and frequency-domain metrics) for anomaly detection",
+        "Developed and validated machine learning classifiers (SVM, Random Forest) in scikit-learn to identify arrhythmias, achieving over 90% accuracy",
+        "Visualized results with Matplotlib and Seaborn for comprehensive analysis",
       ],
-      results: [
-        "Successfully delivered glitch-free demo with reliable game mechanics",
-        "Coordinated interfaces across 4-person team with comprehensive module integration",
-      ],
+      results: ["Achieved over 90% accuracy in arrhythmia classification"],
       links: [
-        { label: "GitHub", href: "https://github.com/parthnkheni/whack-a-mole-fpga" },
-        { label: "Report", href: "/Whack_A_Mole_FPGA_Report.pdf" }
-      ],
-    },
-    {
-      slug: "portfolio-website",
-      title: "Building this Portfolio",
-      date: "Dec 2025",
-      blurb:
-        "Modern portfolio website built with Next.js 15, React, TypeScript, and Three.js featuring interactive 3D project visualizations.",
-      overview:
-        "A responsive portfolio website showcasing projects, experience, and skills. Features custom 3D wireframe models for each project built with React Three Fiber, dynamic routing, and a minimalist dark theme design.",
-      tech: ["Next.js 15", "React", "TypeScript", "Three.js", "React Three Fiber", "Tailwind CSS"],
-      highlights: [
-        "Built with Next.js 15 App Router and TypeScript for type-safe development",
-        "Integrated React Three Fiber for interactive 3D project visualizations with auto-rotating models",
-        "Designed custom wireframe 3D models for each project (FPGA board, robot car, temperature sensor)",
-        "Implemented responsive design with Tailwind CSS and particle background effects",
-        "Created dynamic routing system for project detail pages with static generation",
-      ],
-      results: [
-        "Fully responsive portfolio with seamless navigation and interactive 3D graphics",
-        "Optimized performance with Next.js static generation and Suspense boundaries",
-      ],
-      links: [
-        { label: "GitHub", href: "https://github.com/parthnkheni/parth-portfolio" },
+        { label: "GitHub", href: "https://github.com/parthnkheni/ECG-Data-Analysis" },
+        { label: "Report", href: "/ECG_Data_Analysis_Final_Report.pdf" }
       ],
     },
     {
@@ -296,6 +266,31 @@ export const site: {
         { label: "GitHub", href: "https://github.com/parthnkheni/MAPS" },
         { label: "Report", href: "/MAPS_report.pdf" },
         { label: "Pitch Deck", href: "/MAPS_pitchdeck.pdf" }
+      ],
+    },
+    {
+      slug: "whack-a-mole-fpga",
+      title: "Whack-a-Mole Reaction Game on FPGA",
+      date: "Sept 2025 – Dec 2025",
+      blurb:
+        "Real-time Whack-a-Mole reaction game on Nexys4 DDR FPGA with multi-difficulty rounds and LED/switch I/O.",
+      overview:
+        "Designed a real-time Whack-a-Mole reaction game on a Nexys4 DDR FPGA, enabling 30-second multi-difficulty rounds with 5 LED 'moles' and per-mole switch/hammer input. Features debounced button I/O, difficulty timing, random mole selection, and comprehensive top-level integration in Verilog.",
+      tech: ["Verilog", "FPGA", "Nexys4 DDR", "Vivado", "Digital Logic Design"],
+      highlights: [
+        "Designed real-time Whack-a-Mole reaction game on Nexys4 DDR FPGA with 30-second multi-difficulty rounds",
+        "Implemented 5 LED 'moles' with per-mole switch/hammer input using debounced button I/O",
+        "Engineered difficulty timing, random mole selection, and top-level integration in Verilog",
+        "Improved reliability and integration by owning input and game-control modules across 4-person team",
+        "Delivered glitch-free demo through Vivado simulation, timing analysis, and on-board testing",
+      ],
+      results: [
+        "Successfully delivered glitch-free demo with reliable game mechanics",
+        "Coordinated interfaces across 4-person team with comprehensive module integration",
+      ],
+      links: [
+        { label: "GitHub", href: "https://github.com/parthnkheni/whack-a-mole-fpga" },
+        { label: "Report", href: "/Whack_A_Mole_FPGA_Report.pdf" }
       ],
     },
     {
@@ -340,26 +335,6 @@ export const site: {
       links: [
         { label: "GitHub", href: "https://github.com/parthnkheni/Portable-Arduino-Powered-Threshold-Sensor" },
         { label: "Report", href: "/Portable Arduino Powered Threshold Sensor.pdf" }
-      ],
-    },
-    {
-      slug: "ecg-data-analysis",
-      title: "ECG Data Analysis",
-      date: "Sept 2024 – Dec 2024",
-      blurb:
-        "ML classifiers for ECG arrhythmia detection achieving over 90% accuracy.",
-      overview:
-        "Processed and cleaned raw ECG signals in Python/Pandas, applying digital filters and performing feature engineering (time-domain and frequency-domain metrics) for anomaly detection.",
-      tech: ["Python", "Pandas", "scikit-learn", "SVM", "Random Forest", "Matplotlib", "Seaborn"],
-      highlights: [
-        "Processed and cleaned raw ECG signals in Python/Pandas, applying digital filters and feature engineering (time-domain and frequency-domain metrics) for anomaly detection",
-        "Developed and validated machine learning classifiers (SVM, Random Forest) in scikit-learn to identify arrhythmias, achieving over 90% accuracy",
-        "Visualized results with Matplotlib and Seaborn for comprehensive analysis",
-      ],
-      results: ["Achieved over 90% accuracy in arrhythmia classification"],
-      links: [
-        { label: "GitHub", href: "https://github.com/parthnkheni/ECG-Data-Analysis" },
-        { label: "Report", href: "/ECG_Data_Analysis_Final_Report.pdf" }
       ],
     },
   ],

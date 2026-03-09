@@ -13,7 +13,7 @@ export default function ResearchPage() {
             <Link href="/" className="text-zinc-50 font-light">
               PK
             </Link>
-            <div className="flex gap-8 text-zinc-400 font-light">
+            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
               <Link href="/" className="hover:text-zinc-50 transition-colors">
                 Home
               </Link>
@@ -50,8 +50,8 @@ export default function ResearchPage() {
             Publications & Presentations
           </h2>
           <div className="space-y-12">
-            {site.publications.map((pub, i) => (
-              <article key={i} className="pb-12 border-b border-zinc-900">
+            {site.publications.map((pub) => (
+              <article key={pub.title} className="pb-12 border-b border-zinc-900">
                 <p className="text-zinc-400 leading-relaxed">
                   {pub.authors.split("Kheni, P. N.").map((part, j, arr) => (
                     <span key={j}>
@@ -81,8 +81,8 @@ export default function ResearchPage() {
             Awards & Honors
           </h2>
           <div className="space-y-12">
-            {site.awards.map((award, i) => (
-              <article key={i} className="pb-12 border-b border-zinc-900">
+            {site.awards.map((award) => (
+              <article key={award.title} className="pb-12 border-b border-zinc-900">
                 <h3 className="text-xl font-light text-zinc-50 mb-2">
                   {award.title}
                 </h3>
