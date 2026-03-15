@@ -1,106 +1,79 @@
-// app/research/page.tsx
 import Link from "next/link";
 import { site } from "../data/site";
-import ParticleBackground from "../components/ParticleBackground";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function ResearchPage() {
   return (
-    <main className="min-h-screen bg-black text-zinc-50 relative">
-      <ParticleBackground />
-      <nav className="relative border-b border-zinc-900">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between text-sm">
-            <Link href="/" className="text-zinc-50 font-light">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <header className="border-b border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <div className="flex items-baseline justify-between">
+            <Link href="/" className="font-mono text-lg font-semibold hover:text-[var(--accent)]">
               PK
             </Link>
-            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
-              <Link href="/" className="hover:text-zinc-50 transition-colors">
-                Home
-              </Link>
-              <Link href="/projects" className="hover:text-zinc-50 transition-colors">
-                Projects
-              </Link>
-              <Link href="/experience" className="hover:text-zinc-50 transition-colors">
-                Experience
-              </Link>
-              <Link href="/certifications" className="hover:text-zinc-50 transition-colors">
-                Certifications
-              </Link>
-              <Link href="/game" className="hover:text-zinc-50 transition-colors">
-                Demo
-              </Link>
-            </div>
+            <nav className="hidden md:flex gap-4 text-sm font-mono text-[var(--muted)]">
+              <Link href="/" className="hover:text-[var(--foreground)]">home</Link>
+              <Link href="/projects" className="hover:text-[var(--foreground)]">projects</Link>
+              <Link href="/experience" className="hover:text-[var(--foreground)]">experience</Link>
+              <Link href="/certifications" className="hover:text-[var(--foreground)]">certifications</Link>
+              <ThemeToggle />
+            </nav>
           </div>
         </div>
-      </nav>
+      </header>
 
-      <div className="relative max-w-6xl mx-auto px-6 py-32">
-        <header className="mb-24">
-          <h1 className="text-5xl md:text-6xl font-light tracking-tight mb-6">
-            Research & Honors
-          </h1>
-          <p className="text-xl text-zinc-400 font-light max-w-2xl">
-            Publications, presentations, and awards in machine learning and space physics
-          </p>
-        </header>
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <section className="mb-12">
+          <h1 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-8">Publications & Presentations</h1>
 
-        {/* Publications & Presentations */}
-        <section className="mb-24">
-          <h2 className="text-sm uppercase tracking-widest text-zinc-500 mb-12">
-            Publications & Presentations
-          </h2>
-          <div className="space-y-12">
+          <div className="space-y-8">
             {site.publications.map((pub) => (
-              <article key={pub.title} className="pb-12 border-b border-zinc-900">
-                <p className="text-zinc-400 leading-relaxed">
+              <article key={pub.title} className="pb-8 border-b border-[var(--border)]">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                  <p className="font-medium">
+                    &ldquo;{pub.title}&rdquo;
+                  </p>
+                  <span className="font-mono text-xs text-[var(--muted)] flex-shrink-0">{pub.date}</span>
+                </div>
+                <p className="text-[15px] text-[var(--secondary)] leading-relaxed">
                   {pub.authors.split("Kheni, P. N.").map((part, j, arr) => (
                     <span key={j}>
                       {part}
                       {j < arr.length - 1 && (
-                        <span className="text-zinc-50 font-medium">Kheni, P. N.</span>
+                        <span className="font-semibold text-[var(--foreground)]">Kheni, P. N.</span>
                       )}
                     </span>
                   ))}
                 </p>
-                <p className="text-zinc-50 mt-2">
-                  &ldquo;{pub.title}&rdquo;
-                </p>
-                <p className="text-zinc-500 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   <span className="italic">{pub.venue}</span>
                   {pub.note && <span> — {pub.note}</span>}
-                  <span className="ml-4">{pub.date}</span>
                 </p>
               </article>
             ))}
           </div>
         </section>
 
-        {/* Awards & Honors */}
         <section>
-          <h2 className="text-sm uppercase tracking-widest text-zinc-500 mb-12">
-            Awards & Honors
-          </h2>
-          <div className="space-y-12">
+          <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-8">Awards & Honors</h2>
+
+          <div className="space-y-6">
             {site.awards.map((award) => (
-              <article key={award.title} className="pb-12 border-b border-zinc-900">
-                <h3 className="text-xl font-light text-zinc-50 mb-2">
-                  {award.title}
-                </h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  {award.detail}
-                </p>
-                <p className="text-sm text-zinc-500 mt-2">{award.date}</p>
+              <article key={award.title} className="pb-6 border-b border-[var(--border)] last:border-0">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+                  <h3 className="font-semibold">{award.title}</h3>
+                  <span className="font-mono text-xs text-[var(--muted)] flex-shrink-0">{award.date}</span>
+                </div>
+                <p className="text-[15px] text-[var(--secondary)]">{award.detail}</p>
               </article>
             ))}
           </div>
         </section>
       </div>
 
-      <footer className="relative border-t border-zinc-900">
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <p className="text-zinc-600 text-xs">
-            © {new Date().getFullYear()} {site.name}
-          </p>
+      <footer className="border-t border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <p className="text-xs text-[var(--muted)]">© {new Date().getFullYear()} {site.name}</p>
         </div>
       </footer>
     </main>

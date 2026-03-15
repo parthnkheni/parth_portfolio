@@ -1,97 +1,67 @@
-// app/experience/page.tsx
 import Link from "next/link";
 import { site } from "../data/site";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function ExperiencePage() {
   return (
-    <main className="min-h-screen bg-black text-zinc-50">
-      <nav className="border-b border-zinc-900">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between text-sm">
-            <Link href="/" className="text-zinc-50 font-light">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <header className="border-b border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <div className="flex items-baseline justify-between">
+            <Link href="/" className="font-mono text-lg font-semibold hover:text-[var(--accent)]">
               PK
             </Link>
-            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
-              <Link href="/" className="hover:text-zinc-50 transition-colors">
-                Home
-              </Link>
-              <Link href="/projects" className="hover:text-zinc-50 transition-colors">
-                Projects
-              </Link>
-              <Link href="/certifications" className="hover:text-zinc-50 transition-colors">
-                Certifications
-              </Link>
-              <Link href="/research" className="hover:text-zinc-50 transition-colors">
-                Research
-              </Link>
-              <Link href="/game" className="hover:text-zinc-50 transition-colors">
-                Demo
-              </Link>
-            </div>
+            <nav className="hidden md:flex gap-4 text-sm font-mono text-[var(--muted)]">
+              <Link href="/" className="hover:text-[var(--foreground)]">home</Link>
+              <Link href="/projects" className="hover:text-[var(--foreground)]">projects</Link>
+              <Link href="/certifications" className="hover:text-[var(--foreground)]">certifications</Link>
+              <Link href="/research" className="hover:text-[var(--foreground)]">research</Link>
+              <ThemeToggle />
+            </nav>
           </div>
         </div>
-      </nav>
+      </header>
 
-      <div className="max-w-6xl mx-auto px-6 py-32">
-        <header className="mb-24">
-          <h1 className="text-5xl md:text-6xl font-light tracking-tight mb-6">
-            Experience
-          </h1>
-          <p className="text-xl text-zinc-400 font-light max-w-2xl">
-            Professional roles, internships, and research positions
-          </p>
-        </header>
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <h1 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-8">Experience</h1>
 
-        <div className="space-y-16">
+        <div className="space-y-10">
           {site.experiences.map((exp) => (
-            <article
-              key={exp.company}
-              className="grid md:grid-cols-3 gap-8 pb-16 border-b border-zinc-900"
-            >
-              <div>
-                <h2 className="text-2xl font-light text-zinc-50 mb-2">
-                  {exp.company}
-                </h2>
-                <p className="text-zinc-400 mb-1">{exp.role}</p>
-                {exp.location && (
-                  <p className="text-sm text-zinc-600 mb-2">{exp.location}</p>
-                )}
-                <p className="text-sm text-zinc-500">{exp.date}</p>
+            <article key={exp.company} className="pb-10 border-b border-[var(--border)] last:border-0">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+                <h2 className="font-semibold">{exp.company}</h2>
+                <span className="font-mono text-xs text-[var(--muted)] flex-shrink-0">{exp.date}</span>
               </div>
 
-              <div className="md:col-span-2">
-                <ul className="space-y-3 mb-6">
-                  {exp.description.map((item, j) => (
-                    <li key={j} className="text-zinc-400 leading-relaxed flex gap-3">
-                      <span className="text-zinc-600 mt-1.5">·</span>
-                      <span>{item}</span>
-                    </li>
+              <p className="text-sm text-[var(--muted)] mb-4">
+                {exp.role}
+                {exp.location && ` · ${exp.location}`}
+              </p>
+
+              <ul className="space-y-2 text-[15px] text-[var(--secondary)]">
+                {exp.description.map((item, j) => (
+                  <li key={j} className="flex gap-2">
+                    <span className="text-[var(--muted)] select-none">—</span>
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {exp.tech && exp.tech.length > 0 && (
+                <div className="flex flex-wrap gap-x-2 gap-y-1 mt-4">
+                  {exp.tech.map((tech) => (
+                    <span key={tech} className="font-mono text-xs text-[var(--muted)]">{tech}</span>
                   ))}
-                </ul>
-
-                {exp.tech && exp.tech.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs text-zinc-600"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </article>
           ))}
         </div>
       </div>
 
-      <footer className="border-t border-zinc-900">
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <p className="text-zinc-600 text-xs">
-            © {new Date().getFullYear()} {site.name}
-          </p>
+      <footer className="border-t border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <p className="text-xs text-[var(--muted)]">© {new Date().getFullYear()} {site.name}</p>
         </div>
       </footer>
     </main>

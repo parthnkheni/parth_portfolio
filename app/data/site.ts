@@ -136,7 +136,8 @@ export const site: {
       role: "Instructor",
       date: "Apr 2022 – Jul 2023",
       description: [
-        "Delivered math instruction to classes of up to 10 students, raising comprehension by 20% and improving engagement by 25%",
+        "Delivered engaging math instruction to classes of up to 10 students using diverse methods, raising comprehension by 20% and improving overall engagement by 25%",
+        "Evaluated 100+ assignments monthly, providing constructive feedback, clear guidelines, and tailored reinforcement to build confidence, discipline, and student growth",
       ],
       tech: [],
     },
@@ -162,7 +163,7 @@ export const site: {
     },
     {
       institution: "Rutgers University",
-      degree: "BS Computer Engineering",
+      degree: "BS Computer Engineering (Transferred)",
       date: "Sept 2023 – May 2024",
       coursework: [],
       honors: [],

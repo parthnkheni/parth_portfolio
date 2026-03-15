@@ -1,97 +1,102 @@
-// app/projects/[slug]/page.tsx
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "../../data/site";
+import ThemeToggle from "../../components/ThemeToggle";
 
 export function generateStaticParams() {
   return site.projects.map((p) => ({ slug: p.slug }));
 }
 
-export default function ProjectDetailPage({
+export default async function ProjectDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = site.projects.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+  const project = site.projects.find((p) => p.slug === slug);
   if (!project) return notFound();
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-50">
-      <div className="mx-auto max-w-3xl px-6 py-12">
-        <div className="mb-8 flex items-center justify-between">
-          <Link className="text-sm text-zinc-300 hover:text-zinc-50" href="/projects">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <div className="flex items-center justify-between mb-10">
+          <Link href="/projects" className="font-mono text-sm text-[var(--muted)] hover:text-[var(--foreground)]">
             ← Projects
           </Link>
-          <Link className="text-sm text-zinc-300 hover:text-zinc-50" href="/">
-            Home
-          </Link>
+          <div className="flex gap-4 items-baseline">
+            <Link href="/" className="font-mono text-sm text-[var(--muted)] hover:text-[var(--foreground)]">
+              Home
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
 
-        <header className="space-y-3">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h1 className="text-3xl font-semibold tracking-tight">{project.title}</h1>
-            <span className="text-sm text-zinc-400">{project.date}</span>
+        <header className="pb-8 border-b border-[var(--border)]">
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-3">
+            <h1 className="text-2xl font-semibold">{project.title}</h1>
+            <span className="font-mono text-xs text-[var(--muted)]">{project.date}</span>
           </div>
 
-          <p className="text-zinc-300">{project.overview}</p>
+          <p className="text-[15px] text-[var(--secondary)] leading-relaxed mb-4">{project.overview}</p>
 
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div className="flex flex-wrap gap-x-2 gap-y-1">
             {project.tech.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-zinc-800 px-2.5 py-1 text-xs text-zinc-300"
-              >
-                {t}
-              </span>
+              <span key={t} className="font-mono text-xs text-[var(--muted)]">{t}</span>
             ))}
           </div>
         </header>
 
-        <section className="mt-10">
-          <h2 className="text-sm font-semibold tracking-wide text-zinc-200">
-            HIGHLIGHTS
-          </h2>
-          <ul className="mt-4 list-disc space-y-2 pl-5 text-zinc-300">
+        <section className="py-8 border-b border-[var(--border)]">
+          <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-4">Highlights</h2>
+          <ul className="space-y-2 text-[15px] text-[var(--secondary)]">
             {project.highlights.map((h) => (
-              <li key={h}>{h}</li>
+              <li key={h} className="flex gap-2">
+                <span className="text-[var(--muted)] select-none">—</span>
+                <span className="leading-relaxed">{h}</span>
+              </li>
             ))}
           </ul>
         </section>
 
         {project.results?.length ? (
-          <section className="mt-10">
-            <h2 className="text-sm font-semibold tracking-wide text-zinc-200">
-              RESULTS
-            </h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-zinc-300">
+          <section className="py-8 border-b border-[var(--border)]">
+            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-4">Results</h2>
+            <ul className="space-y-2 text-[15px] text-[var(--secondary)]">
               {project.results.map((r) => (
-                <li key={r}>{r}</li>
+                <li key={r} className="flex gap-2">
+                  <span className="text-[var(--muted)] select-none">—</span>
+                  <span className="leading-relaxed">{r}</span>
+                </li>
               ))}
             </ul>
           </section>
         ) : null}
 
         {project.links?.length ? (
-          <section className="mt-10">
-            <h2 className="text-sm font-semibold tracking-wide text-zinc-200">
-              LINKS
-            </h2>
-            <div className="mt-4 flex flex-wrap gap-3">
+          <section className="py-8">
+            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-4">Links</h2>
+            <div className="flex flex-wrap gap-4">
               {project.links.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl border border-zinc-800 px-4 py-2 text-sm hover:bg-zinc-900"
+                  className="font-mono text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
                 >
-                  {l.label}
+                  {l.label} ↗
                 </a>
               ))}
             </div>
           </section>
         ) : null}
       </div>
+
+      <footer className="border-t border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <p className="text-xs text-[var(--muted)]">© {new Date().getFullYear()} {site.name}</p>
+        </div>
+      </footer>
     </main>
   );
 }

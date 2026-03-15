@@ -1,116 +1,76 @@
-// app/projects/page.tsx
-"use client";
-
 import Link from "next/link";
 import { site } from "../data/site";
-import ParticleBackground from "../components/ParticleBackground";
-import Project3DModel from "../components/Project3DModel";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen bg-black text-zinc-50 relative">
-      <ParticleBackground />
-      <nav className="relative border-b border-zinc-900">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between text-sm">
-            <Link href="/" className="text-zinc-50 font-light">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <header className="border-b border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <div className="flex items-baseline justify-between">
+            <Link href="/" className="font-mono text-lg font-semibold hover:text-[var(--accent)]">
               PK
             </Link>
-            <div className="hidden md:flex gap-8 text-zinc-400 font-light">
-              <Link href="/" className="hover:text-zinc-50 transition-colors">
-                Home
-              </Link>
-              <Link href="/experience" className="hover:text-zinc-50 transition-colors">
-                Experience
-              </Link>
-              <Link href="/certifications" className="hover:text-zinc-50 transition-colors">
-                Certifications
-              </Link>
-              <Link href="/research" className="hover:text-zinc-50 transition-colors">
-                Research
-              </Link>
-              <Link href="/game" className="hover:text-zinc-50 transition-colors">
-                Demo
-              </Link>
-            </div>
+            <nav className="hidden md:flex gap-4 text-sm font-mono text-[var(--muted)]">
+              <Link href="/" className="hover:text-[var(--foreground)]">home</Link>
+              <Link href="/experience" className="hover:text-[var(--foreground)]">experience</Link>
+              <Link href="/certifications" className="hover:text-[var(--foreground)]">certifications</Link>
+              <Link href="/research" className="hover:text-[var(--foreground)]">research</Link>
+              <ThemeToggle />
+            </nav>
           </div>
         </div>
-      </nav>
+      </header>
 
-      <div className="relative max-w-6xl mx-auto px-6 py-32">
-        <header className="mb-24">
-          <h1 className="text-5xl md:text-6xl font-light tracking-tight mb-6">
-            Projects
-          </h1>
-          <p className="text-xl text-zinc-400 font-light max-w-2xl">
-            Technical projects spanning machine learning, robotics, embedded systems,
-            and full-stack development
-          </p>
-        </header>
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <h1 className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] mb-8">Projects</h1>
 
-        <div className="space-y-16">
+        <div className="space-y-10">
           {site.projects.map((project) => (
-            <article
-              key={project.slug}
-              className="group relative pb-16 border-b border-zinc-900"
-            >
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="relative">
-                  <h2 className="text-2xl font-light text-zinc-50 mb-2">
-                    {project.title}
-                  </h2>
-                  <p className="text-sm text-zinc-500 mb-4">{project.date}</p>
-
-                  {/* 3D Model positioned near title */}
-                  <div className="h-[200px] w-full overflow-hidden rounded-xl opacity-60">
-                    <Project3DModel projectSlug={project.slug} />
-                  </div>
-                </div>
-
-                <div className="md:col-span-2">
-                  <p className="text-zinc-400 leading-relaxed mb-6">
-                    {project.blurb}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs text-zinc-600"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-4">
-                    {project.links && project.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-zinc-400 hover:text-zinc-50 transition-colors inline-flex items-center gap-2"
-                      >
-                        {link.label}
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    ))}
-                  </div>
-                </div>
+            <article key={project.slug} className="pb-10 border-b border-[var(--border)] last:border-0">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="text-lg font-semibold hover:text-[var(--accent)] transition-colors"
+                >
+                  {project.title}
+                </Link>
+                <span className="font-mono text-xs text-[var(--muted)] flex-shrink-0">{project.date}</span>
               </div>
+
+              <p className="text-[15px] text-[var(--secondary)] leading-relaxed mb-4">
+                {project.blurb}
+              </p>
+
+              <div className="flex flex-wrap gap-x-2 gap-y-1 mb-4">
+                {project.tech.map((tech) => (
+                  <span key={tech} className="font-mono text-xs text-[var(--muted)]">{tech}</span>
+                ))}
+              </div>
+
+              {project.links && project.links.length > 0 && (
+                <div className="flex gap-4">
+                  {project.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-[var(--accent)] hover:text-[var(--accent-hover)]"
+                    >
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
             </article>
           ))}
         </div>
       </div>
 
-      <footer className="relative border-t border-zinc-900">
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <p className="text-zinc-600 text-xs">
-            © {new Date().getFullYear()} {site.name}
-          </p>
+      <footer className="border-t border-[var(--border)]">
+        <div className="max-w-3xl mx-auto px-6 py-6">
+          <p className="text-xs text-[var(--muted)]">© {new Date().getFullYear()} {site.name}</p>
         </div>
       </footer>
     </main>
