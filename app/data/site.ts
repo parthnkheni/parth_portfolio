@@ -217,9 +217,9 @@ export const site: {
       title: "LLM-Assisted Incident Summarization & Clustering",
       date: "Jan 2026 – Present",
       blurb:
-        "End-to-end incident intelligence pipeline using LLMs to ingest logs, generate structured summaries, embed and cluster incidents to identify duplicates and recurring failure patterns. Microsoft-affiliated.",
+        "End-to-end incident intelligence pipeline using LLMs to ingest logs, generate structured summaries, embed and cluster incidents to identify duplicates and recurring failure patterns. Developed in collaboration with Microsoft, advised by Alison Yao (Microsoft Research).",
       overview:
-        "Built an end-to-end incident intelligence pipeline that ingests large-scale system/application logs, generates structured incident summaries with LLMs, embeds summaries, and clusters incidents to identify duplicates and recurring failure patterns. Includes a backend service and lightweight UI/API to explore incidents and clusters.",
+        "Built an end-to-end incident intelligence pipeline that ingests large-scale system/application logs, generates structured incident summaries with LLMs, embeds summaries, and clusters incidents to identify duplicates and recurring failure patterns. Includes a backend service and lightweight UI/API to explore incidents and clusters. Developed in collaboration with Microsoft, advised by Alison Yao (Microsoft Research).",
       tech: ["Python", "LLMs", "Embeddings", "Clustering", "NLP", "REST API"],
       highlights: [
         "Built an end-to-end incident intelligence pipeline: ingest large-scale system/application logs, generate structured incident summaries with LLMs, embed summaries, and cluster incidents to identify duplicates and recurring failure patterns",
