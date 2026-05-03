@@ -195,6 +195,11 @@ export const site: {
 
   awards: [
     {
+      title: "BU Undergraduate Research Opportunities Program (UROP) Award",
+      detail: "Funded summer research with Dr. Luisa Capannolo at the BU Center for Space Physics — advancing neural-network forecasting of energetic electron precipitation in the radiation belts.",
+      date: "Summer 2026",
+    },
+    {
       title: "NSF ACCESS / Jetstream2 Allocation (CIS260066)",
       detail: "$31,444 awarded; 146,000 GPU SUs; 4 TB storage.",
       date: "Jan 2026 – Present",
@@ -222,6 +227,9 @@ export const site: {
       ],
       results: [
         "Scalable pipeline handling noisy real-world logs with practical accuracy vs cost/latency tradeoffs",
+      ],
+      links: [
+        { label: "GitHub", href: "https://github.com/BU-EC528-Spring-2026/LLM_Assisted_Incident_Summarization_and_Clustering_from_System_Logs" },
       ],
     },
     {
