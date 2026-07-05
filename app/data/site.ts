@@ -97,9 +97,30 @@ export const site: {
 
   experiences: [
     {
+      company: "Tufts University — AABL Lab (CRA-WP DREU)",
+      role: "Undergraduate Research Fellow",
+      date: "June 2026 – Present",
+      location: "Medford, MA",
+      description: [
+        "Selected for the competitive, nationally funded CRA-WP Distributed Research Experiences for Undergraduates (DREU) fellowship to conduct research with Prof. Elaine Short in socially assistive human-robot interaction and human-in-the-loop machine learning",
+        "Building a real-to-sim manipulation pipeline in the Genesis simulator: reconstructed a digital twin of a table-mounted Kinova Gen3 Lite arm and delivered a scripted pick-and-place task at ~0.7 cm place accuracy, with a headless (EGL) offscreen-render pipeline for looping visual verification of planned motions",
+      ],
+      tech: ["Python", "Genesis", "Kinova Gen3 Lite", "Digital Twin", "Real-to-Sim", "PyTorch"],
+    },
+    {
+      company: "New Harbor Venture Partners",
+      role: "Applied Data Science Intern",
+      date: "May 2026 – Present",
+      description: [
+        "Migrating a ~20,000-contact investor CRM (Affinity) by building a Python pipeline to clean, deduplicate (email-keyed), and import PitchBook exports into standardized fund/contact records for targeted outreach",
+        "Designing an LLM workflow that connects Claude to the CRM via a Model Context Protocol (MCP) to auto-tag funds by investment criteria (stage, check size, sector) and surface ranked investor targets per deal",
+      ],
+      tech: ["Python", "Pandas", "Affinity CRM", "Claude", "MCP", "LLMs"],
+    },
+    {
       company: "Beth Israel Deaconess Medical Center (BIDMC)",
       role: "Machine Learning Intern",
-      date: "Sept 2025 – Present",
+      date: "Sept 2025 – May 2026",
       location: "Boston, MA",
       description: [
         "Lead a multi-institutional collaboration between BIDMC and Johns Hopkins to develop and integrate a learning-based autonomous wound closure algorithm within the da Vinci Research Kit (dVRK) platform for future clinical translation, coordinating requirements and experiment milestones across teams",
@@ -111,7 +132,7 @@ export const site: {
     {
       company: "Boston University Center for Space Physics",
       role: "Machine Learning Research Assistant",
-      date: "Apr 2025 – Present",
+      date: "Apr 2025 – June 2026",
       location: "Boston, MA",
       description: [
         "Build end-to-end Python pipelines for POES and OMNI time-series data, generating model-ready datasets with 7M+ 2-second satellite samples per month by ingesting NetCDF files, interpolating gaps, enforcing L-shell (3–9) and MLT quality cuts, and joining with 4-hour windows of 1-minute solar-wind drivers",

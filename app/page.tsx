@@ -70,8 +70,9 @@ export default function Page() {
               in Machine Learning. I take projects from data all the way to deployment, including training, evaluation, and integration.
             </p>
             <p>
-              My work spans surgical robotics simulation, space weather prediction, and
-              embedded systems. I care about building systems that are easy to reproduce, measure, and improve over time.
+              My work spans assistive-robotics research, surgical robotics simulation, space-weather
+              forecasting, and applied data science — from LLM/MCP workflows to embedded systems. I care about
+              building systems that are easy to reproduce, measure, and improve over time.
             </p>
           </div>
         </section>
@@ -83,19 +84,17 @@ export default function Page() {
           <div className="space-y-8">
             <div>
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
-                <h3 className="font-semibold">Beth Israel Deaconess Medical Center</h3>
-                <span className="font-mono text-xs text-[var(--muted)]">Sept 2025 – Present</span>
+                <h3 className="font-semibold">Tufts University — AABL Lab (CRA-WP DREU)</h3>
+                <span className="font-mono text-xs text-[var(--muted)]">June 2026 – Present</span>
               </div>
-              <p className="text-sm text-[var(--muted)] mb-2">Machine Learning Intern · Boston, MA</p>
+              <p className="text-sm text-[var(--muted)] mb-2">Undergraduate Research Fellow · Medford, MA</p>
               <p className="text-[15px] text-[var(--secondary)] leading-relaxed">
-                Leading a multi-institutional collaboration between BIDMC and Johns Hopkins to develop
-                a learning-based autonomous wound closure algorithm within the da Vinci research platform.
-              </p>
-              <p className="text-sm text-[var(--muted)] mt-2 font-mono">
-                NSF ACCESS / Jetstream2 — $31,444 allocation · 146,000 GPU SUs
+                CRA-WP DREU fellow with Prof. Elaine Short, researching socially assistive human-robot
+                interaction and human-in-the-loop learning. Building a real-to-sim manipulation pipeline —
+                a digital twin of a Kinova Gen3 Lite arm in the Genesis simulator, reaching ~0.7 cm place accuracy.
               </p>
               <div className="flex flex-wrap gap-x-2 gap-y-1 mt-3">
-                {["Python", "ROS", "NVIDIA Isaac Sim", "ORBIT-Surgical", "Singularity", "dVRK"].map(t => (
+                {["Python", "Genesis", "Kinova Gen3 Lite", "Real-to-Sim", "Digital Twin"].map(t => (
                   <span key={t} className="font-mono text-xs text-[var(--muted)]">{t}</span>
                 ))}
               </div>
@@ -103,16 +102,17 @@ export default function Page() {
 
             <div>
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
-                <h3 className="font-semibold">BU Center for Space Physics</h3>
-                <span className="font-mono text-xs text-[var(--muted)]">Apr 2025 – Present</span>
+                <h3 className="font-semibold">New Harbor Venture Partners</h3>
+                <span className="font-mono text-xs text-[var(--muted)]">May 2026 – Present</span>
               </div>
-              <p className="text-sm text-[var(--muted)] mb-2">Machine Learning Researcher · Boston, MA</p>
+              <p className="text-sm text-[var(--muted)] mb-2">Applied Data Science Intern</p>
               <p className="text-[15px] text-[var(--secondary)] leading-relaxed">
-                Building neural network models for space weather forecasting. Processing 7M+ satellite
-                samples per month for predictive analytics of energetic electron precipitation events.
+                Migrating a ~20,000-contact investor CRM (Affinity) with a Python dedupe/import pipeline, and
+                building an LLM workflow that connects Claude to the CRM over the Model Context Protocol (MCP)
+                to auto-tag funds and surface ranked investor targets per deal.
               </p>
               <div className="flex flex-wrap gap-x-2 gap-y-1 mt-3">
-                {["Python", "PyTorch", "Keras", "Pandas", "NetCDF"].map(t => (
+                {["Python", "Pandas", "Affinity CRM", "Claude", "MCP", "LLMs"].map(t => (
                   <span key={t} className="font-mono text-xs text-[var(--muted)]">{t}</span>
                 ))}
               </div>
